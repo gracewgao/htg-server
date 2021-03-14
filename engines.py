@@ -72,5 +72,20 @@ class ContentEngine(object):
         """
         return self._r.zrange(self.SIMKEY % item_id, 0, num-1, withscores=True, desc=True)
 
+    def match(self, data_source, order_id, num):
+        ds = pd.read_csv(data_source)
+        best = []
+        for idx, row in ds.iterrows():
+            if (row['order_id'] == order_id):
+                matches = predict(self, row['item_id'])
+
+                # sort the list in order of relevancy
+                matches = matches.sort(key=lambda x:x[1], reverse= True)
+                for match in matches:
+                    users = pd.read_csv('sample-user-data.csv')
+                    queue = find_users(users)
+                best = queue[0]
+        return best
+
 
 content_engine = ContentEngine()
