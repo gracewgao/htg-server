@@ -10,6 +10,8 @@ This is a content-based recommendation engine that computes similar items based 
 
 First, make sure you have a local redis instance running. The engine expects to find redis at redis://localhost:6379, but you can set REDIS_URL env var if you have it running elsewhere.
 
+> sudo redis-server
+
 You'll also need [Anaconda](https://www.continuum.io/downloads) installed (a scientific distribution of Python). Create a new virtualenv with the needed dependencies:
 
 > conda create -n htg -python=2.7
